@@ -1,6 +1,6 @@
 # Exploratory-data-analysis-week-4
-##Data
-less 
+## Data
+ 
 The data for this assignment are available from the course web site as a single zip file:
 
 Data for Peer Assessment [29Mb]
@@ -22,6 +22,6 @@ PM2.5 Emissions Data (\color{red}{\verb|summarySCC_PM25.rds|}summarySCC_PM25.rds
 
 Source Classification Code Table (\color{red}{\verb|Source_Classification_Code.rds|}Source_Classification_Code.rds): This table provides a mapping from the SCC digit strings in the Emissions table to the actual name of the PM2.5 source. The sources are categorized in a few different ways from more general to more specific and you may choose to explore whatever categories you think are most useful. For example, source “10100101” is known as “Ext Comb /Electric Gen /Anthracite Coal /Pulverized Coal”
 
-##Assignment
-less 
+## Assignment
+ 
 The overall goal of this assignment is to explore the National Emissions Inventory database and see what it say about fine particulate matter pollution in the United states over the 10-year period 1999–2008. You may use any R package you want to support your analysis.
