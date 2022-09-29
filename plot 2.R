@@ -1,3 +1,7 @@
+## Question 2
+# Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") 
+## from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
 setwd("./")
 path<-"./"
 if(!require("data.table")){
@@ -17,35 +21,31 @@ if(!require("ggplot2")){
 data_1 = readRDS(file = "Source_Classification_Code.rds")
 data_2 = readRDS(file = "summarySCC_PM25.rds")
 
-#data_2[, Emissions := lapply(.SD, as.numeric), .SDcols = c("Emissions")]
+sub_data_2<- data_2[data_2$fips == "24510",]
 
-
-sum_data <- lapply(split(data_2,factor(data_2$year)),function(x) {
+sum_data_1 <- lapply(split(sub_data_2,factor(sub_data_2$year)),function(x) {
   colSums(x["Emissions"],
-           na.rm = TRUE)})
+          na.rm = TRUE)})
 
 
-sum_data<-data.frame(sum_data)
+sum_data_1<-data.frame(sum_data_1)
 years<-c("1999","2002","2005","2008")
 cname<-c("years","Emissions")
 
 
-newdata <- data.frame("years"=character(), "Emissions"=numeric())
+newdata_1 <- data.frame("years"=character(), "Emissions"=numeric())
 for(y in years) {
   s<-paste("X",y,sep = "")
-  x<-sum_data[,s]
-  newdata <- rbind(newdata, data.frame(y, x))
+  x<-sum_data_1[,s]
+  newdata_1 <- rbind(newdata_1, data.frame(y, x))
 }
-colnames(newdata)<- c("years","Emissions")
+colnames(newdata_1)<- c("years","Emissions")
 
-png("plot1.png")
+png("plot2.png")
 
-  
-#data_2[, lapply(.SD, sum, na.rm = TRUE), .SDcols = c("Emissions"), by = year]
 
-barplot(newdata[, "Emissions"]
-        , names = newdata[, "years"]
+barplot(newdata_1[, "Emissions"]
+        , names = newdata_1[, "years"]
         , xlab = "Years", ylab = "Emissions"
         , main = "Emissions over the Years")
-
 dev.off()
