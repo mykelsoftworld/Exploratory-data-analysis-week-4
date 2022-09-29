@@ -47,5 +47,5 @@ png("plot2.png")
 barplot(newdata_1[, "Emissions"]
         , names = newdata_1[, "years"]
         , xlab = "Years", ylab = "Emissions"
-        , main = "Emissions over the Years")
+        , main = "Emissions over the Years for Baltimore")
 dev.off()
