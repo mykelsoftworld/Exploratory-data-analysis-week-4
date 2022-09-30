@@ -49,3 +49,20 @@ barplot(newdata_1[, "Emissions"]
         , xlab = "Years", ylab = "Emissions"
         , main = "Emissions over the Years for Baltimore")
 dev.off()
+
+# library(dplyr)
+# library(ggplot2)
+# 
+# file_name <- "summarySCC_PM25.rds"
+# data <- readRDS(file_name)
+# 
+# pm25_emi_balt <- data %>% group_by(year) %>% filter(fips == "24510") %>% 
+#   summarise(total = sum(Emissions))
+# 
+# plot2 <- barplot(pm25_emi_balt$total, 
+#                     main = "Total PM2.5 Emissions in Baltimore City, Maryland", 
+#                     xlab = "Year", ylab = "PM2.5 Emissions in Tons", 
+#                     names.arg = pm25_emi_balt$year, col = "darkred", ylim = c(0,3600))
+# 
+# text(plot2, round(pm25_emi_balt$total), label = round(emi_balt$total), 
+#      pos = 3, cex = 1.2)
