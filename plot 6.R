@@ -68,3 +68,42 @@ dev.off()
 #   xlab("Year") + ylab("Pm2.5 Emissions in Tons") +
 #   theme(plot.title = element_text(hjust = 0.5)) + ylim(c(0, 8000)) +
 #   theme_classic() + geom_text(size = 4, vjust = -1)
+
+# library(dplyr)
+# library(ggplot2)
+# # Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, 
+# # California (\color{red}{\verb|fips == "06037"|}fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+# 
+# NEI <- readRDS("summarySCC_PM25.rds")
+# nei_baltimore_la <- subset(NEI, fips == "24510" | fips == "06037")
+# SCC <- readRDS("Source_Classification_Code.rds")
+# 
+# SCC_mv <- SCC[grepl("vehicle", SCC$SCC.Level.Two, ignore.case=TRUE),]
+# merged <- merge(x=nei_baltimore_la, y=SCC_mv, by.x = 'SCC', by.y='SCC')
+# 
+# get_county = function(x){
+#   if (x == '24510'){
+#     val = "Baltimore"
+#   }
+#   else{
+#     val = "Los Angeles"
+#   }
+#   val
+# }
+# merged$county = sapply(merged$fips, get_county)
+# nei_grouped <- merged %>% group_by(county, year) %>% summarise_at(vars(c("Emissions")), list(emissions = sum))
+# 
+# png("plot6.png")
+# 
+# qplot(
+#   x = year, 
+#   y = emissions,
+#   data = nei_grouped,
+#   color = county,
+#   xlab = 'year',
+#   ylab = 'emissions',
+#   main = 'Emissions from motor vehicles per Year in Los Angeles and Baltimore',
+#   geom=c("line")
+# )
+# 
+# dev.off()
